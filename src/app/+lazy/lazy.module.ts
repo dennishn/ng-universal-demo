@@ -25,7 +25,7 @@ export class LazyView implements OnInit {
         this.store$.subscribe(store => {
             this.meta.addTag({
                 name: 'og:image',
-                property: store['coverImageUrl']
+                content: store['coverImageUrl']
             });
         });
             // .subscribe(res => console.log('JAA'));
