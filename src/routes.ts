@@ -1,4 +1,4 @@
-export const ROUTES: string[] = [
-  '/',
-  '/lazy'
+export const ROUTES:string[] = [
+    '/',
+    '/lazy'
 ];
