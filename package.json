@@ -4,7 +4,8 @@
   "main": "index.js",
   "repository": {},
   "scripts": {
-    "start": "npm run build && npm run server",
+    "start": "nodemon dist/server.js",
+    "postinstall": "npm run build:prod",
     "build": "webpack",
     "build:aot": "webpack --env.aot --env.client & webpack --env.aot --env.server",
     "build:prod": "webpack --env.aot --env.client -p & webpack --env.aot --env.server",
