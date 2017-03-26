@@ -32,6 +32,7 @@ app.use(compression());
 app.use('/', express.static('dist', {index: false}));
 
 ROUTES.forEach(route => {
+    console.log('registered', route);
     app.get(route, (req, res) => {
         console.time(`GET: ${req.originalUrl}`);
         res.render('../dist/index', {
