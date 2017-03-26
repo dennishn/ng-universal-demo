@@ -1,7 +1,7 @@
-import { data } from './data';
+import {data} from './data';
 
 export class App {
-  getData() {
-    return data;
-  }
+    getData() {
+        return data;
+    }
 }

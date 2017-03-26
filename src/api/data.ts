@@ -1,4 +1,4 @@
 export const data = {
-  greeting: 'Hello',
-  name: 'World'
+    greeting: 'Hello',
+    name: 'World'
 };
