@@ -45,6 +45,6 @@ app.get('/data', (req, res) => {
   console.timeEnd(`GET: ${req.originalUrl}`);
 });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log(`Listening at ${baseUrl}`);
 });
