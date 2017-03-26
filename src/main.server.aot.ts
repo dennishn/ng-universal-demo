@@ -6,6 +6,7 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 import 'rxjs/Rx';
 import * as express from 'express';
+import * as compression from 'compression';
 import {platformServer, renderModuleFactory} from '@angular/platform-server';
 import {ServerAppModuleNgFactory} from './ngfactory/app/server-app.module.ngfactory';
 import {ngExpressEngine} from './modules/ng-express-engine/express-engine';
@@ -25,6 +26,8 @@ app.engine('html', ngExpressEngine({
 
 app.set('view engine', 'html');
 app.set('views', 'src');
+
+app.use(compression());
 
 app.use('/', express.static('dist', {index: false}));
 
