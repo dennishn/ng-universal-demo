@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {AppShellModule} from '@angular/app-shell';
 import {ServerModule} from '@angular/platform-server';
 import {ServerTransferStateModule} from '../modules/transfer-state/server-transfer-state.module';
 import {AppComponent} from './app.component';
@@ -14,7 +15,8 @@ import {BrowserModule} from '@angular/platform-browser';
         }),
         ServerModule,
         ServerTransferStateModule,
-        AppModule
+        AppModule,
+        AppShellModule.prerender()
     ]
 })
 export class ServerAppModule {

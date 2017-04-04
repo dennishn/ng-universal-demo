@@ -1,10 +1,18 @@
 const { root } = require('./helpers');
 
+const AngularServiceWorkerPlugin = require('@angular/service-worker/webpack').default;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const {LoaderOptionsPlugin} = require('webpack');
 /**
  * This is a common webpack config which is the base for all builds
  */
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
   resolve: {
     extensions: ['.ts', '.js']
   },
@@ -15,8 +23,96 @@ module.exports = {
     rules: [
       { test: /\.ts$/, loader: '@ngtools/webpack' },
       { test: /\.css$/, loader: 'raw-loader' },
-      { test: /\.html$/, loader: 'raw-loader' }
+      { test: /\.html$/, loader: 'raw-loader' },
+      {
+        "enforce": "pre",
+        "test": /\.js$/,
+        "loader": "source-map-loader",
+        "exclude": [
+          /\/node_modules\//
+        ]
+      },
+      {
+        "test": /\.(eot|svg)$/,
+        "loader": "file-loader?name=[name].[hash:20].[ext]"
+      },
+      {
+        "test": /\.(jpg|png|gif|otf|ttf|woff|woff2|cur|ani)$/,
+        "loader": "url-loader?name=[name].[hash:20].[ext]&limit=10000"
+      },
+      {
+        test: /\.scss$/,
+        use: ['to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+        exclude: [root('src/styles')]
+      },
+      {
+        test: /\.scss$/,
+        // use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader?sourceMap'],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader','postcss-loader','sass-loader']
+        }),
+        include: [root('src/styles')]
+      },
     ]
   },
-  plugins: []
+  plugins: [
+    new ExtractTextPlugin({
+      "filename": "[name].bundle.css",
+      "disable": true
+    }),
+
+    new LoaderOptionsPlugin({
+      "sourceMap": false,
+      "options": {
+        "postcss": [
+          autoprefixer()
+        ],
+        "sassLoader": {
+          "sourceMap": false,
+          "includePaths": []
+        },
+        "context": ""
+      }
+    }),
+
+    new CopyWebpackPlugin([
+      {from: root('src/ngsw-manifest.json')},
+    ]),
+
+    new AngularServiceWorkerPlugin(),
+
+    // new CopyWebpackPlugin([
+    //   {from: root('src/service-worker/worker-basic.js')}
+    // ]),
+    // new SWPrecacheWebpackPlugin(
+    //     {
+    //       cacheId: 'ng-universal-demo',
+    //       staticFileGlobs: [
+    //         'dist/**.html',
+    //         'dist/assets/**',
+    //         'dist/sw-registration.js'
+    //       ],
+    //       root: 'dist',
+    //       stripPrefix: 'dist/',
+    //       navigateFallback: '/index.html',
+    //       runtimeCaching: [{
+    //         urlPattern: /timeline/,
+    //         handler: 'networkFirst'
+    //       },
+    //         {
+    //           urlPattern: /fonts\.googleapis\.com/,
+    //           handler: 'cacheFirst'
+    //         },
+    //         {
+    //           urlPattern: /fonts\.gstatic\.com/,
+    //           handler: 'cacheFirst'
+    //         },
+    //         {
+    //           urlPattern: /pbs\.twimg\.com/,
+    //           handler: 'cacheFirst'
+    //         }]
+    //     }
+    // ),
+  ]
 };
