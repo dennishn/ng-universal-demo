@@ -5,24 +5,22 @@ import {API} from "../api/api.service";
 @Component({
     selector: 'home-view',
     template: `
-        <ul>
-            <li *ngFor="let store of stores$ | async">
-                <a [routerLink]="['stores', store.id]">{{store.name}}</a>
-                ??? {{store | json}}            
-            </li>
-        </ul>
+        <!--<a [routerLink]="['boards', $location]">{{store.name}}</a>-->
+        <!--<pre>{{$location | json}}</pre>            -->
     `
 })
 export class HomeView implements OnInit {
 
-    public stores$: Observable<any>;
+    public $location: Observable<any>;
 
     constructor(private api: API) {
     }
 
     ngOnInit() {
-        this.stores$ = this.api.getStores().map(res => {
+        this.$location = this.api.getLocation('Nivå').map(res => {
             return res['subscribedStores']['data'];
         });
+
+        this.$location.subscribe(location => console.info('location', location));
     }
 }

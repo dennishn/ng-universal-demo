@@ -3,12 +3,10 @@
     "moduleResolution": "node",
     "module": "es2015",
     "target": "es5",
-    "noImplicitAny": false,
-    "sourceMap": false,
+    "declaration": false,
+    "sourceMap": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "./dist/out-tsc",
-    "declaration": false,
     "lib": [
       "es2016",
       "dom"

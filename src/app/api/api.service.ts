@@ -8,14 +8,12 @@ import {TransferHttp} from "../../modules/transfer-http/transfer-http";
 
 @Injectable()
 export class API {
-    private token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0OTA1NjY4NjcsInVzZXIiOnsiZW1haWwiOiJyZSswMDAxQG5vZGVzLmRrIiwiaWQiOjIsInBhc3N3b3JkIjoiJDJhJDEwJFdjTjVDaFpsazl1VWZnMXZZamQ4MGVBcjlEQy5mUGxaODcuczZrdWNXXC9QUnA2WWF6XC9cL3RTIn19.4ufUGh/CIONFwo+hCdEYMfui5Jg7qTqgfsz1OVZ8Vq4=';
-    private baseUrl = 'https://bv-events.development-like.st/api';
+    private baseUrl = 'http://xmlopen.rejseplanen.dk/bin/rest.exe';
 
-    private defaultRequestParams = {};
-    private defaultRequestHeaders = {
-        'N-Meta': 'web;development',
-        'Authorization': this.token
+    private defaultRequestParams = {
+        // format: 'json'
     };
+    private defaultRequestHeaders = {};
 
     constructor(private http: TransferHttp) {}
 
@@ -31,10 +29,10 @@ export class API {
         return Observable.throw(error || 'Unknown Error');
     }
 
-    private request(url: string): Observable<Response> {
+    private request(url: string, params?: any): Observable<Response> {
         const requestOpts = new RequestOptions({
             url: [this.baseUrl, url].join(''),
-            search: Object.assign({}, this.defaultRequestParams),
+            search: Object.assign({}, this.defaultRequestParams, params || null),
             headers: new Headers(this.defaultRequestHeaders)
         });
 
@@ -43,10 +41,21 @@ export class API {
             .catch(this.handleError);
     }
 
-    public getStores(): Observable<Response> {
-        return this.request(`/stores`);
+    public getLocation(input: string): Observable<Response> {
+        return this.request(`/location`, {input: input});
     }
-    public getStore(storeId: string): Observable<Response> {
-        return this.request(`/stores/${storeId}`);
+    public getStationBoard(id: string): Observable<Response> {
+        const d = new Date();
+        const year = d.getFullYear().toString().substr(-2);
+        const month = ('0' + (d.getMonth() + 1)).slice(-2);
+        const day = ('0' + (d.getDay() + 1)).slice(-2);
+        const hour = d.getHours() + 1; // An hour from now
+        const minutes = d.getMinutes();
+        
+        return this.request(`/departureBoard`, {
+            id: id,
+            date: day + '.' + month + '.' + year,
+            time: hour + ':' + minutes
+        });
     }
 }

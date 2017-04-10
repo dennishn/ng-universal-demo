@@ -9,25 +9,22 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'lazy-view',
-    template: `<pre>{{store$ | async | json}}</pre>`
+    template: `<pre>{{board$ | async | json}}</pre>`
 })
 export class LazyView implements OnInit {
 
-    public store$: Observable<any>;
+    public board$: Observable<any>;
 
     constructor(private meta: Meta, private api: API, private route: ActivatedRoute) {}
 
     ngOnInit() {
 
-        this.store$ = this.route.params
-            .switchMap((params: Params) => this.api.getStore(params['storeId']));
+        this.board$ = this.route.params
+            .switchMap((params: Params) => this.api.getStationBoard(params['boardId']));
 
-        this.store$.subscribe(store => {
-            this.meta.addTag({
-                name: 'og:image',
-                content: store['coverImageUrl']
-            });
-        });
+        // this.board$.subscribe(store => {
+        //
+        // });
             // .subscribe(res => console.log('JAA'));
             // .subscribe((hero: Hero) => this.hero = hero);
 

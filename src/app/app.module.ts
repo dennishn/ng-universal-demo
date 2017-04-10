@@ -19,7 +19,7 @@ import { SwSandboxComponent } from './sw-sandbox/sw-sandbox.component';
         TransferHttpModule,
         RouterModule.forRoot([
             {path: '', component: HomeView, pathMatch: 'full'},
-            {path: 'stores/:storeId', loadChildren: './+lazy/lazy.module#LazyModule'},
+            {path: 'boards/:boardId', loadChildren: './+lazy/lazy.module#LazyModule'},
             {path: 'sw', component: SwSandboxComponent, pathMatch: 'full'}
         ]),
         MaterialModule,

@@ -1,16 +1,22 @@
 const ngtools = require('@ngtools/webpack');
 const webpackMerge = require('webpack-merge');
+
 const commonPartial = require('./webpack/webpack.common');
+
 const clientPartial = require('./webpack/webpack.client');
+const clientProdPartial = require('./webpack/webpack.client.prod');
+
+const analyzerPartial = require('./webpack/webpack.analyzer');
+
 const serverPartial = require('./webpack/webpack.server');
-const prodPartial = require('./webpack/webpack.prod');
+
 const { getAotPlugin } = require('./webpack/webpack.aot');
 
 module.exports = function (options, webpackOptions) {
   options = options || {};
 
   if (options.aot) {
-    console.log(`Running build for ${options.client ? 'client' : 'server'} with AoT Compilation`)
+    console.log(`Running build for ${(options.client || options.analyzer) ? 'client' : 'server'} with AoT Compilation`)
   }
 
   const serverConfig = webpackMerge({}, commonPartial, serverPartial, {
@@ -27,7 +33,7 @@ module.exports = function (options, webpackOptions) {
   });
 
   if (webpackOptions.p) {
-    clientConfig = webpackMerge({}, clientConfig, prodPartial);
+    clientConfig = webpackMerge({}, clientConfig, clientProdPartial);
   }
 
   const configs = [];
@@ -35,6 +41,11 @@ module.exports = function (options, webpackOptions) {
     configs.push(clientConfig, serverConfig);
 
   } else if (options.client) {
+
+    if(options.analyzer) {
+      clientConfig = webpackMerge({}, clientConfig, analyzerPartial);
+    }
+
     configs.push(clientConfig);
 
   } else if (options.server) {

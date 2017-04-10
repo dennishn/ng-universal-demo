@@ -1,5 +1,5 @@
 export const ROUTES:string[] = [
     '/',
-    '/stores/:storeId',
+    '/boards/:boardId',
     '/sw'
 ];

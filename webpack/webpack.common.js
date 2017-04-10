@@ -12,10 +12,24 @@ const {LoaderOptionsPlugin} = require('webpack');
  * This is a common webpack config which is the base for all builds
  */
 module.exports = {
-  // devtool: 'source-map',
-  resolve: {
-    extensions: ['.ts', '.js']
+  "resolve": {
+    "extensions": [
+      ".ts",
+      ".js"
+    ],
+    "modules": [
+      "./node_modules"
+    ]
   },
+  "resolveLoader": {
+    "modules": [
+      "./node_modules"
+    ]
+  },
+  // devtool: 'source-map',
+  // resolve: {
+  //   extensions: ['.ts', '.js']
+  // },
   output: {
     path: root('dist')
   },
@@ -80,39 +94,6 @@ module.exports = {
       {from: root('src/ngsw-manifest.json')},
     ]),
 
-    new AngularServiceWorkerPlugin(),
-
-    // new CopyWebpackPlugin([
-    //   {from: root('src/service-worker/worker-basic.js')}
-    // ]),
-    // new SWPrecacheWebpackPlugin(
-    //     {
-    //       cacheId: 'ng-universal-demo',
-    //       staticFileGlobs: [
-    //         'dist/**.html',
-    //         'dist/assets/**',
-    //         'dist/sw-registration.js'
-    //       ],
-    //       root: 'dist',
-    //       stripPrefix: 'dist/',
-    //       navigateFallback: '/index.html',
-    //       runtimeCaching: [{
-    //         urlPattern: /timeline/,
-    //         handler: 'networkFirst'
-    //       },
-    //         {
-    //           urlPattern: /fonts\.googleapis\.com/,
-    //           handler: 'cacheFirst'
-    //         },
-    //         {
-    //           urlPattern: /fonts\.gstatic\.com/,
-    //           handler: 'cacheFirst'
-    //         },
-    //         {
-    //           urlPattern: /pbs\.twimg\.com/,
-    //           handler: 'cacheFirst'
-    //         }]
-    //     }
-    // ),
+    new AngularServiceWorkerPlugin()
   ]
 };

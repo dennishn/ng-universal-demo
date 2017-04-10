@@ -8,7 +8,9 @@ import {ngExpressEngine} from './modules/ng-express-engine/express-engine';
 import {ROUTES} from './routes';
 import {App} from './api/app';
 import {enableProdMode} from '@angular/core';
+
 enableProdMode();
+
 const app = express();
 const api = new App();
 const port = 8000;

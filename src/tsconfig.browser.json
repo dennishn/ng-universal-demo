@@ -3,17 +3,6 @@
   "angularCompilerOptions": {
     "entryModule": "./app/browser-app.module#BrowserAppModule"
   },
-  "compilerOptions": {
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "outDir": "../out-tsc/app",
-    "target": "es5",
-    "module": "es2015",
-    "baseUrl": "",
-    "types": []
-  },
   "exclude": [
     "./main.server.aot.ts"
   ]
