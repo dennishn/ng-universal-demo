@@ -9,7 +9,7 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'lazy-view',
-    template: `<pre>{{board$ | async | json}}</pre>`
+    template: `<!--<pre>{{board$ | async | json}}</pre>-->`
 })
 export class LazyView implements OnInit {
 

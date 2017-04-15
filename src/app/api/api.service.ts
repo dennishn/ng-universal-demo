@@ -8,10 +8,10 @@ import {TransferHttp} from "../../modules/transfer-http/transfer-http";
 
 @Injectable()
 export class API {
-    private baseUrl = 'http://xmlopen.rejseplanen.dk/bin/rest.exe';
+    private baseUrl = 'http://localhost:8000/api';
 
     private defaultRequestParams = {
-        // format: 'json'
+        format: 'json'
     };
     private defaultRequestHeaders = {};
 
@@ -32,6 +32,7 @@ export class API {
     private request(url: string, params?: any): Observable<Response> {
         const requestOpts = new RequestOptions({
             url: [this.baseUrl, url].join(''),
+            // url: url,
             search: Object.assign({}, this.defaultRequestParams, params || null),
             headers: new Headers(this.defaultRequestHeaders)
         });
@@ -42,6 +43,7 @@ export class API {
     }
 
     public getLocation(input: string): Observable<Response> {
+        console.log('wtf', input);
         return this.request(`/location`, {input: input});
     }
     public getStationBoard(id: string): Observable<Response> {
