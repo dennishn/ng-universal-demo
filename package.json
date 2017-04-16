@@ -24,7 +24,7 @@
     "watch:dev:server": "npm-run-all -p server:dev:watch watch",
     "watch:dev": "npm run clean && npm run build && npm run watch:dev:server",
     "watch:prod:server": "npm-run-all -p server watch",
-    "watch:prod": "npm run build:prod:ngc && npm run watch:prod:server"
+    "watch:prod": "npm run build:prod:rollup && npm run watch:prod:server"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -46,6 +46,8 @@
     "@angular/service-worker": "next",
     "compression": "^1.6.2",
     "express": "^4.15.2",
+    "imports-loader": "^0.7.1",
+    "moment": "^2.18.1",
     "request": "^2.81.0",
     "rxjs": "^5.2.0",
     "xhr2": "^0.1.4",

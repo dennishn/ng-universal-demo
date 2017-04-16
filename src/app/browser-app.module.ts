@@ -1,15 +1,9 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {MaterialModule} from '@angular/material';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppComponent} from './app.component';
 import {AppModule} from './app.module';
 import {BrowserTransferStateModule} from '../modules/transfer-state/browser-transfer-state.module';
-import {AppMaterialModule} from './shared/material/material.module';
-import { SwSandboxComponent } from './sw-sandbox/sw-sandbox.component';
-import {AppShellModule} from '@angular/app-shell';
-
-// import '../styles.scss';
-import '../styles/styles.scss';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -17,10 +11,9 @@ import '../styles/styles.scss';
         BrowserModule.withServerTransition({
             appId: 'ng-universal-demo'
         }),
-        // AppMaterialModule,
+        BrowserAnimationsModule,
         BrowserTransferStateModule,
-        AppModule,
-        // AppShellModule.runtime()
+        AppModule
     ]
 })
 export class BrowserAppModule {

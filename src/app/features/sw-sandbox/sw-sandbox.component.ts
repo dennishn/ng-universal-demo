@@ -4,7 +4,7 @@ import { NgServiceWorker } from '@angular/service-worker';
 @Component({
   selector: 'app-sw-sandbox',
   templateUrl: './sw-sandbox.component.html',
-  styleUrls: ['./sw-sandbox.component.css'],
+  styleUrls: ['./sw-sandbox.component.scss'],
   providers: [NgServiceWorker]
 })
 export class SwSandboxComponent implements OnInit {

@@ -36,7 +36,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.ts$/, loader: '@ngtools/webpack' },
-      { test: /\.css$/, loader: 'raw-loader' },
+      // { test: /\.css$/, loader: 'raw-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
       {
         "enforce": "pre",
@@ -72,8 +72,7 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      "filename": "[name].bundle.css",
-      "disable": true
+      "filename": "[name].bundle.css"
     }),
 
     new LoaderOptionsPlugin({

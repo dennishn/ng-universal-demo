@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import {TransferHttp} from "../../modules/transfer-http/transfer-http";
+import {DateFormatterService} from "../shared/date-formatter/date-formatter.service";
 
 @Injectable()
 export class API {
@@ -15,7 +16,7 @@ export class API {
     };
     private defaultRequestHeaders = {};
 
-    constructor(private http: TransferHttp) {}
+    constructor(private http: TransferHttp, private dateFormatter: DateFormatterService) {}
 
     private handleError(error: any) {
         console.error('API Error:', error);
@@ -46,18 +47,19 @@ export class API {
         console.log('wtf', input);
         return this.request(`/location`, {input: input});
     }
-    public getStationBoard(id: string): Observable<Response> {
-        const d = new Date();
-        const year = d.getFullYear().toString().substr(-2);
-        const month = ('0' + (d.getMonth() + 1)).slice(-2);
-        const day = ('0' + (d.getDay() + 1)).slice(-2);
-        const hour = d.getHours() + 1; // An hour from now
-        const minutes = d.getMinutes();
+    public getStationBoard(id: string, date: Date): Observable<Response> {
+        const formattedDate = this.dateFormatter.formatForApi(date);
+        // const d = new Date();
+        // const year = d.getFullYear().toString().substr(-2);
+        // const month = ('0' + (d.getMonth() + 1)).slice(-2);
+        // const day = ('0' + (d.getDay() + 1)).slice(-2);
+        // const hour = d.getHours() + 1; // An hour from now
+        // const minutes = d.getMinutes();
         
         return this.request(`/departureBoard`, {
             id: id,
-            date: day + '.' + month + '.' + year,
-            time: hour + ':' + minutes
+            date: formattedDate.date,
+            time: formattedDate.time
         });
     }
 }
