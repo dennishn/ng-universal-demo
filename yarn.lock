@@ -38,10 +38,6 @@
   version "4.1.0-beta.0"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.1.0-beta.0.tgz#953a2074dc8cbf16ac97e4f49fd57395d8e67b43"
 
-"@angular/material@next":
-  version "2.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-2.0.0-beta.3.tgz#ec31dee61d7300ece28fee476852db236ded1e13"
-
 "@angular/platform-browser-dynamic@next":
   version "4.1.0-beta.0"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.1.0-beta.0.tgz#4685bae015f56777c227c5a6df308df072998cd8"
@@ -498,6 +494,10 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.0:
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
+
+bulma@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.4.0.tgz#2a0b07555d53bb4eb17861e3159e2616c21dfa6c"
 
 bytes@2.3.0:
   version "2.3.0"

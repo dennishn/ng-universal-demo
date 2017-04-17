@@ -1,6 +1,28 @@
-<md-input-container>
-    <input mdInput #locationSearchTerm (keyup)="search(locationSearchTerm.value)" placeholder="Søg på Station eller Stoppested">
-</md-input-container>
-<md-nav-list>
-    <a md-list-item [routerLink]="['boards', location.id]" *ngFor="let location of $locations | async">{{location | json}}</a>
-</md-nav-list>
+<div class="container">
+
+    <div class="columns">
+        <div class="column">
+            <div class="field">
+                <p class="control" [ngClass]="{'is-loading': isLoading}">
+                    <input class="input" #locationSearchTerm (keyup)="search(locationSearchTerm.value)" placeholder="Søg på Station eller Stoppested">
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column">
+            <div class="card" *ngFor="let location of $locations | async" style="margin-bottom: 1rem;">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        {{location.name}}
+                    </p>
+                </header>
+                <footer class="card-footer">
+                    <a class="card-footer-item" [routerLink]="['boards', location.id]" >Se næste afgange</a>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+</div>

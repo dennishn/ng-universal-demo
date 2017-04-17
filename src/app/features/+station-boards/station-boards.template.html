@@ -1,14 +1,20 @@
-<md-card *ngFor="let departure of $board | async">
-    <md-card-header>
-        <md-card-title>{{departure.name}}</md-card-title>
-        <md-card-subtitle>{{departure.stop}}</md-card-subtitle>
-    </md-card-header>
-    <md-card-content>
-        <p>
-            {{departure.time}}
-        </p>
-    </md-card-content>
-</md-card>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stop</th>
+            <th></th>
+            <th class="has-text-right">Afgang</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let departure of $board | async">
+            <th>{{departure.stop}}</th>
+            <th>{{departure.name}}</th>
+            <th class="has-text-right"><strong>{{departure.time}}</strong></th>
+        </tr>
+    </tbody>
+</table>
 
 <!--
 { "name": "Bus 354", "type": "BUS", "stop": "Nivå St., ved tunnellen (Nivå St. (Tunellen))", "time": "12:45", "date": "16.04.17", "messages": "0", "rtTime": "12:47", "rtDate": "16.04.17", "finalStop": "Nivå St., ved centret", "direction": "Nivå St.", "JourneyDetailRef": { "ref": "http://hicta1.rejseplanen.dk/bin/rest.exe/journeyDetail?ref=595989%2F203145%2F796788%2F199734%2F86%3Fdate%3D16.04.17%26format%3Djson" } }

@@ -16,6 +16,8 @@ export class LocationsView implements OnInit {
 
     public $locations: Observable<any>;
 
+    public isLoading: boolean = false;
+
     private searchTermStream = new Subject<string>();
 
     constructor(private api: API) {
@@ -27,9 +29,11 @@ export class LocationsView implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .switchMap((term: string) => {
+                this.isLoading = true;
                 return this.api.getLocation(term);
             })
             .map((results) => {
+                this.isLoading = false;
                 return results['LocationList']['StopLocation'];
             });
     }

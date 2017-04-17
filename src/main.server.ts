@@ -12,7 +12,7 @@ import {enableProdMode} from '@angular/core';
 enableProdMode();
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const baseUrl = `http://localhost:${port}`;
 
 app.engine('html', ngExpressEngine({
@@ -60,6 +60,6 @@ app.get('/api/departureBoard', (req, res) => {
         .pipe(res);
 });
 
-app.listen(process.env.PORT || 8000, () => {
-    console.log(`Listening at ${baseUrl}`);
+app.listen(port, () => {
+    console.log(`Listening at ${baseUrl} on port ${port}`);
 });

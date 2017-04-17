@@ -1,20 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~bulma/sass/utilities/_all.sass";
+
+@import "~bulma/sass/base/_all.sass";
+
+@import "~bulma/sass/grid/columns.sass";
+
+@import "~bulma/sass/layout/_all.sass";
+
+@import "~bulma/sass/elements/form.sass";
+@import "~bulma/sass/elements/table.sass";
+
+@import "~bulma/sass/components/nav.sass";
+@import "~bulma/sass/components/card.sass";
 
 body {
   margin: 0;
-}
-
-.mat-toolbar {
-  background: #673ab7;
-  color: rgba(255,255,255,.87);
-  min-height: 64px;
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: 20px;
-  font-weight: 500;
-  font-family: Roboto,"Helvetica Neue",sans-serif;
-  padding: 0 16px;
-  flex-direction: column;
 }

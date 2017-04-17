@@ -13,7 +13,9 @@ import {ServerAppModuleNgFactory} from './ngfactory/app/server-app.module.ngfact
 import {ngExpressEngine} from './modules/ng-express-engine/express-engine';
 import {ROUTES} from './routes';
 import {enableProdMode} from '@angular/core';
+
 enableProdMode();
+
 const app = express();
 const port = process.env.PORT || 8000;
 const baseUrl = `http://localhost:${port}`;
@@ -70,5 +72,5 @@ app.get('/api/departureBoard', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening at ${baseUrl}`);
+    console.log(`Listening at ${baseUrl} on port ${port}`);
 });
