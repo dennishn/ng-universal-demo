@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": {},
   "scripts": {
-    "prestart": "npm run build:prod:rollup",
+    "heroku-postbuild": "npm run build:prod:rollup",
     "prebuild": "npm run clean",
     "prebuild:aot": "npm run clean",
     "prebuild:prod": "npm run clean",
