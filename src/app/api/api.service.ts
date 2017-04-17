@@ -6,18 +6,19 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/catch';
 import {TransferHttp} from "../../modules/transfer-http/transfer-http";
 import {DateFormatterService} from "../shared/date-formatter/date-formatter.service";
-import {environment} from "../../environments/environment";
 
 @Injectable()
 export class API {
-    private baseUrl = environment.production ? 'https://ng-universal-demo.herokuapp.com/api' : 'http://localhost:8000/api';
+    private baseUrl = '/api';
 
     private defaultRequestParams = {
         format: 'json'
     };
     private defaultRequestHeaders = {};
 
-    constructor(private http: TransferHttp, private dateFormatter: DateFormatterService) {}
+    constructor(private http: TransferHttp, private dateFormatter: DateFormatterService) {
+        console.log('APIs are great!', process.env, this.baseUrl);
+    }
 
     private handleError(error: any) {
         console.error('API Error:', error);

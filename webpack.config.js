@@ -1,5 +1,6 @@
 const ngtools = require('@ngtools/webpack');
 const webpackMerge = require('webpack-merge');
+const webpack = require('webpack');
 
 const commonPartial = require('./webpack/webpack.common');
 
@@ -22,13 +23,19 @@ module.exports = function (options, webpackOptions) {
   const serverConfig = webpackMerge({}, commonPartial, serverPartial, {
     entry: options.aot ? './src/main.server.aot.ts' : serverPartial.entry, // Temporary
     plugins: [
-      getAotPlugin('server', !!options.aot)
+      getAotPlugin('server', !!options.aot),
+      new webpack.DefinePlugin({
+        environment: webpackOptions.p ? `"production"`: '"development"'
+      })
     ]
   });
 
   let clientConfig = webpackMerge({}, commonPartial, clientPartial, {
     plugins: [
-      getAotPlugin('client', !!options.aot)
+      getAotPlugin('client', !!options.aot),
+      new webpack.DefinePlugin({
+        environment: webpackOptions.p ? `"production"`: '"development"'
+      })
     ]
   });
 

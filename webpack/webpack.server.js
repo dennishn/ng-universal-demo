@@ -10,22 +10,5 @@ module.exports = {
   output: {
     filename: 'server.js'
   },
-  target: 'node',
-  module: {
-    rules: [
-      {
-        /*
-          TODO: Hack - attempt to remove Material related DOM warnings on the server
-         */
-        test: /@angular(\\|\/)material/,
-        loader: 'imports-loader',
-        options: {
-          window: '>global',
-          'CSS': '>null',
-          navigator: '>{get userAgent(){ return \'Chrome\'; }}',
-          document: '>global.document',
-        },
-      },
-    ]
-  }
+  target: 'node'
 };
