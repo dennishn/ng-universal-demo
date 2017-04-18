@@ -85,12 +85,17 @@ export class TransferHttp {
     private getData(uri:string | Request, options:RequestOptionsArgs, callback:(uri:string | Request, options?:RequestOptionsArgs) => Observable<Response>) {
 
         let url = uri;
+        let params: string;
 
         if (typeof uri !== 'string') {
             url = uri.url
         }
 
-        const key = url + JSON.stringify(options)
+        if(options.params) {
+            url += `/${options.params.toString()}`;
+        }
+
+        const key = url + JSON.stringify(options);
 
         try {
             return this.resolveData(key);
