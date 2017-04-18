@@ -9,16 +9,15 @@ import {DateFormatterService} from "../shared/date-formatter/date-formatter.serv
 
 @Injectable()
 export class API {
-    private baseUrl = '/api';
+    // private baseUrl = '/api';
+    private baseUrl = environment === 'production' ? 'https://ng-universal-demo.herokuapp.com/api' : 'http://localhost:8000/api';
 
     private defaultRequestParams = {
         format: 'json'
     };
     private defaultRequestHeaders = {};
 
-    constructor(private http: TransferHttp, private dateFormatter: DateFormatterService) {
-        console.log('APIs are great!', process.env, this.baseUrl);
-    }
+    constructor(private http: TransferHttp, private dateFormatter: DateFormatterService) {}
 
     private handleError(error: any) {
         console.error('API Error:', error);
@@ -35,6 +34,7 @@ export class API {
             search: Object.assign({}, this.defaultRequestParams, params || null),
             headers: new Headers(this.defaultRequestHeaders)
         });
+        console.log(requestOpts);
 
         return this.http.request(url, requestOpts)
             .map(res => res)
