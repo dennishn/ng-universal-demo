@@ -26,10 +26,7 @@ module.exports = {
       "./node_modules"
     ]
   },
-  // devtool: 'source-map',
-  // resolve: {
-  //   extensions: ['.ts', '.js']
-  // },
+  devtool: 'source-map',
   output: {
     path: root('dist')
   },
@@ -61,7 +58,6 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        // use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader?sourceMap'],
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader','postcss-loader','sass-loader']
