@@ -96,7 +96,6 @@ export class TransferHttp {
         }
 
         const key = url + JSON.stringify(options);
-        console.log('IGEN', key);
 
         try {
             return this.resolveData(key);
